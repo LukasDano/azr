@@ -1,0 +1,48 @@
+name: Deploy
+
+on:
+  push:
+    branches:
+      - main
+      - bugfix
+  pull_request:
+    branches:
+      - '**'
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout dev repo
+        uses: actions/checkout@v4
+
+      - name: Setup variables
+        run: |
+          if [[ "${GITHUB_REF_NAME}" == "main" ]]; then
+            DEPLOY_DIR="main"
+          elif [[ "${GITHUB_REF_NAME}" == "bugfix" ]]; then
+            DEPLOY_DIR="bugfix"
+          else
+            echo "Unsupported branch: ${GITHUB_REF_NAME}"
+            exit 1
+          fi
+          echo "DEPLOY_DIR=${DEPLOY_DIR}" >> $GITHUB_ENV
+
+      - name: Checkout host repo
+        uses: actions/checkout@v4
+        with:
+          repository: LukasDano/azr
+          token: ${{ secrets.PAGES_TOKEN }}
+          path: pages-repo
+
+      - name: Copy files to pages repo
+        run: |
+          mkdir -p pages-repo/${DEPLOY_DIR}
+          rm -rf pages-repo/${DEPLOY_DIR}/*
+          rsync -av --exclude 'pages-repo' --exclude '.git' ./ pages-repo/${DEPLOY_DIR}/
+          cd pages-repo
+          git config user.name "${GITHUB_ACTOR}"
+          git config user.email "${GITHUB_ACTOR}@users.noreply.github.com"
+          git add .
+          git commit -m "Deploy ${GITHUB_REF_NAME} to /${DEPLOY_DIR}/" || echo "No changes to commit"
+          git push
