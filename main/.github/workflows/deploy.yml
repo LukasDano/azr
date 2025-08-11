@@ -43,6 +43,7 @@ jobs:
           cd pages-repo
           git config user.name "${GITHUB_ACTOR}"
           git config user.email "${GITHUB_ACTOR}@users.noreply.github.com"
+          export TZ="Europe/Berlin"
           git add .
-          git commit -m "deploy - $(date '+%Y-%m-%d %H:%M:%S')" || echo "No changes to commit"
+          git commit -m "deploy - $(date '+%Y-%m-%d %H:%M:%S %Z')" || echo "No changes to commit"
           git push --force
