@@ -61,7 +61,7 @@
                 <div class="devOption">
                     <li class="nav-item">
                         <a class="nav-link"
-                            href="https://raw.githack.com/LukasDano/arbeitszeitrechner/main/index.html?param1=devOptions&param2=true"
+                            href="https://lukasdano.github.io/azr/main/?param1=devOptions&param2=true"
                             target="_blank" title="Die aktuelle Hauptversion">
                             <img class="icon" src="pictures/icons/calendar.png" alt="Aktuelle Version">
                         </a>
@@ -71,7 +71,7 @@
                 <div class="devOption">
                     <li class="nav-item">
                         <a class="nav-link"
-                            href="https://raw.githack.com/LukasDano/arbeitszeitrechner/bugfix/index.html?param1=devOptions&param2=true"
+                            href="https://lukasdano.github.io/azr/bugfix/?param1=devOptions&param2=true"
                             target="_blank" title="Die aktuelle Testversion">
                             <img class="icon small reAnimation" src="pictures/icons/process.png" alt="Testversion">
                         </a>
@@ -348,7 +348,10 @@
             activateDevOptionsFromURL();
             updateForeverCookies();
             removeCustomButtonParameters();
+
+            // Console Infos
             consoleIntro();
+            informIfUseDeprecated();
         });
     </script>
 

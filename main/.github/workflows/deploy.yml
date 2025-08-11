@@ -1,0 +1,48 @@
+name: Deploy
+
+on:
+  push:
+    branches:
+      - '**'
+  pull_request:
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout devel repo
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Checkout host repo
+        uses: actions/checkout@v4
+        with:
+          repository: LukasDano/azr
+          token: ${{ secrets.PAGES_TOKEN }}
+          path: pages-repo
+
+      - name: Deploy main
+        run: |
+          git fetch origin main
+          git checkout main
+          mkdir -p pages-repo/main
+          rm -rf pages-repo/main/*
+          rsync -av --exclude '.git' --exclude 'pages-repo' ./ pages-repo/main/
+
+      - name: Deploy bugfix
+        run: |
+          git fetch origin bugfix
+          git checkout bugfix
+          mkdir -p pages-repo/bugfix
+          rm -rf pages-repo/bugfix/*
+          rsync -av --exclude '.git' --exclude 'pages-repo' ./ pages-repo/bugfix/
+
+      - name: Push changes
+        run: |
+          cd pages-repo
+          git config user.name "${GITHUB_ACTOR}"
+          git config user.email "${GITHUB_ACTOR}@users.noreply.github.com"
+          git add .
+          git commit -m "Deploy both branches" || echo "No changes to commit"
+          git push --force
