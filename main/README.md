@@ -11,8 +11,8 @@ Jetzt wird das Tool über Github-Pages gehostet (einfach die Links unten nutzen)
 
 
 ## Links
-- [✅ Aktuelle Version](https://lukasdano.github.io/azr/main/)
-- [⚙️ Testversion](https://lukasdano.github.io/azr/bugfix/)
+- ✅ [Aktuelle Version](https://lukasdano.github.io/azr/main/)
+- ⚙️ [Testversion](https://lukasdano.github.io/azr/bugfix/)
 
 
 ## Anmerkung
