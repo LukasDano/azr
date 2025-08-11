@@ -261,3 +261,6 @@
 - Externe Libraries in die ReadMe aufgenommen
 - Loggen der VersionsNr und des Versionsnamens beim Seitenaufruf
 - Die Anwendung per GitHub-Actions und externem Repo auf GitHub-Pages hosten
+- bessere ReadMe für das neue Hostingmodell
+- User über die console informieren das sie noch das alte modell nutzen
+- tauschen der URLs in den DevOptions
