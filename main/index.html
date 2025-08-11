@@ -1,0 +1,358 @@
+<!doctype html>
+<html lang="de">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="Arbeitszeitrechner">
+    <link rel="icon" href="favicon.ico">
+
+    <meta name="Version" content="v2.5.12">
+    <meta name="VersionName" content="Notifications">
+    <meta name="GitHub" content="https://github.com/LukasDano/arbeitszeitrechner">
+
+    <title>Arbeitszeitrechner</title>
+
+    <!-- Base CSS Imports -->
+    <link href="css/bootstrap.css" rel="stylesheet">
+    <link href="css/jquery.classycountdown.css" rel="stylesheet" type="text/css">
+    <link href="css/introjs.css" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <link href="css/custom.css" rel="stylesheet">
+
+    <!-- Notifications  -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css">
+</head>
+
+<body>
+
+    <div class="notifications"></div>
+
+    <nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top">
+
+        <a class="navbar-brand" href="">Arbeitszeitrechner</a>
+
+        <div class="collapse navbar-collapse" id="navbarsExampleDefault">
+            <ul class="navbar-nav mr-auto">
+
+                <li class="nav-item">
+                    <button class="nav-link" onclick="openWeekTimeCalculator()" title="Wochenzeitrechner [Alt + w]">
+                        <img class="icon noneDevOption" src="pictures/icons/week.png" alt="Wochenzeitrechner">
+                    </button>
+                </li>
+                <div id="weekTimeCalculator"></div>
+
+                <li class="nav-item">
+                    <button class="nav-link" onclick="openFlexOfficeCalculator()" title="FlexOffice [Alt + f]">
+                        <img class="icon noneDevOption" src="pictures/icons/homeoffice.png" alt="FlexOffice">
+                    </button>
+                </li>
+                <div id="flexOfficeCalculator"></div>
+
+                <li class="nav-item">
+                    <button class="nav-link" onclick="openCurrentStatsMessageWithValues()"
+                        title="Zeigt die Werte an, wenn jetzt die Arbeit beendet wird [Alt + c]">
+                        <img class="icon noneDevOption" src="pictures/icons/earlier.png" alt="CurrentStatsMessage">
+                    </button>
+                </li>
+                <div id="currentStatsMessage"></div>
+
+                <div class="devOption">
+                    <li class="nav-item">
+                        <a class="nav-link"
+                            href="https://raw.githack.com/LukasDano/arbeitszeitrechner/main/index.html?param1=devOptions&param2=true"
+                            target="_blank" title="Die aktuelle Hauptversion">
+                            <img class="icon" src="pictures/icons/calendar.png" alt="Aktuelle Version">
+                        </a>
+                    </li>
+                </div>
+
+                <div class="devOption">
+                    <li class="nav-item">
+                        <a class="nav-link"
+                            href="https://raw.githack.com/LukasDano/arbeitszeitrechner/bugfix/index.html?param1=devOptions&param2=true"
+                            target="_blank" title="Die aktuelle Testversion">
+                            <img class="icon small reAnimation" src="pictures/icons/process.png" alt="Testversion">
+                        </a>
+                    </li>
+                </div>
+
+
+                <div class="devOption">
+                    <li class="nav-item">
+                        <a class="nav-link" href="https://github.com/LukasDano/arbeitszeitrechner" target="_blank"
+                            title="Das Repository zur Anwendung">
+                            <img class="icon" src="pictures/icons/repository.png" alt="Repository">
+                        </a>
+                    </li>
+                </div>
+
+                <div class="devOption">
+                    <li class="nav-item">
+                        <a class="nav-link"
+                            href="https://github.com/LukasDano/arbeitszeitrechner/blob/bugfix/ChangeLog.md"
+                            target="_blank" title="Das ChangeLog zur Anwendung">
+                            <img class="icon" src="pictures/icons/log.png" alt="ChangeLog">
+                        </a>
+                    </li>
+                </div>
+
+                <div class="devOption">
+                    <li class="nav-item">
+                        <button class="nav-link" id="addBetterDefaultFloat" title="Setzt die Gleitzeit auf +0.14 [F3]">
+                            <img class="icon" src="pictures/icons/plusFourteen.png" alt="+0.14">
+                        </button>
+                    </li>
+                </div>
+
+                <div class="devOption">
+                    <li class="nav-item">
+                        <button class="nav-link" id="overTimeAutomatic" title="OverTimeAutomatic an/aus [F4]">
+                            <img id="overTimeAutomaticIcon" class="icon animation" src="pictures/icons/automaticOff.png"
+                                alt="overTimeAutomaticOff">
+                        </button>
+                    </li>
+                </div>
+
+                <div class="devOption">
+                    <li class="nav-item">
+                        <button class="nav-link" onclick="openShortcutInformation()" id="shortcutInformationButton"
+                            title="Shortcut information [Alt + h]">
+                            <img id="shortcutInformationIcon" class="icon" src="pictures/icons/information.png"
+                                alt="ShortcutInformation">
+                        </button>
+                    </li>
+                </div>
+                <div id="shortcutInformation"></div>
+
+                <div class="devOption">
+                    <li class="nav-item">
+                        <button class="nav-link" onclick="resetPage()">
+                            <img class="icon animation" src="pictures/icons/reload.png" alt="Reset">
+                        </button>
+                    </li>
+                </div>
+
+                <div class="devOption">
+                    <li class="nav-item">
+                        <button class="nav-link" onclick="disableDevOptions()" title="DevOptions schließen [F1]">
+                            <img class="icon" src="pictures/icons/close.png" alt="Exit">
+                        </button>
+                    </li>
+                </div>
+
+                <div class="devOption">
+                    <li class="nav-item">
+                        <button class="nav-link" onclick="openDevOptionsForm()"
+                            title="CustomDevOptions Konfiguration [Alt + d]">
+                            <img class="icon" src="pictures/icons/add.png" alt="Add DevOption">
+                        </button>
+                    </li>
+                </div>
+
+                <div class="devOption">
+                    <div id="customDevOptionOne" class="customDevOption One"></div>
+                </div>
+                <div class="devOption">
+                    <div id="customDevOptionTwo" class="customDevOption Two"></div>
+                </div>
+                <div class="devOption">
+                    <div id="customDevOptionThree" class="customDevOption Three"></div>
+                </div>
+                <div id="devOptionSettings"></div>
+            </ul>
+
+        </div>
+    </nav>
+
+    <main role="main" class="container">
+        <div class="starter-template">
+            <div class="form-group ">
+                <div class="container-fluid">
+                </div>
+
+                <div class="row">
+                    <div class="col">
+                        <div class="text-center">
+                            <h5>Pausenzeit</h5>
+                            <div class="btn-group introjs-relativePosition" data-step="2"
+                                data-intro="Pausenzeit auswählen.">
+                                <button type="button" class="btn btn-light btn-md" id="00min">0:00</button>
+                                <button type="button" class="btn btn-light btn-md active" id="30min">0:30</button>
+                                <button type="button" class="btn btn-light btn-md" id="45min">0:45</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col">
+                        <div class="text-center">
+                            <h5>Arbeitszeit</h5>
+                            <div class="btn-group introjs-relativePosition" data-step="2"
+                                data-intro="Arbeitszeit wählen.">
+                                <button type="button" class="btn btn-light btn-md" id="6h00m">6:00</button>
+                                <button type="button" class="btn btn-light btn-md active" id="7h06m">7:06</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <br>
+                <hr>
+
+                <div class="row">
+                    <div class="col-sm-4 col-8">
+                        <div class="text-center">
+                            <label for="start">Arbeitsbeginn</label>
+                        </div>
+                        <input type="time" id="start"
+                            class="input-lg center-block form-control input-time introjs-relativePosition" data-step="3"
+                            data-intro="Arbeitsbeginn eintragen.">
+                    </div>
+
+                    <div class="col-sm-4 col-8">
+                        <div class="disabled">
+                            <div class="text-center">
+                                <label for="pause">Pausenzeit</label>
+                            </div>
+                            <input type="time" id="pause"
+                                class="input-lg center-block form-control input-time introjs-relativePosition"
+                                value="00:30" data-step="4" data-intro="Pausenzeit individuell anpassen (bei Bedarf).">
+                        </div>
+                    </div>
+
+                    <div class="col-sm-4 col-8">
+                        <div class="text-center">
+                            <label for="end">Arbeitsende</label>
+                        </div>
+                        <input type="time" id="end"
+                            class="input-lg center-block form-control input-time introjs-relativePosition" data-step="5"
+                            data-intro="Endzeit wird automatisch berechnet.">
+                    </div>
+                </div>
+
+                <div class="row">
+
+                    <div class="col-sm-4 col-8">
+                        <div class="disabled">
+                            <div class="text-center">
+                                <label for="soll">Arbeitszeit</label>
+                            </div>
+                            <input type="time" id="soll" value="07:06"
+                                class="input-lg center-block form-control input-time">
+                        </div>
+                    </div>
+
+                    <div class="col-sm-4 col-8">
+                        <div class="text-center">
+                            <label for="float">Gleitzeit</label>
+                        </div>
+                        <input id="float" value="0.00"
+                            class="input-lg center-block form-control input-time introjs-relativePosition" data-step="5"
+                            data-inro="Gleitzeit kann eingetragen werden">
+                    </div>
+
+                    <div class="col-sm-4 col-8">
+                        <div class="text-center">
+                            <label for="reset"></label>
+                        </div>
+                        <button type="button" class="btn btn-light btn-md" id="reset">Reset</button>
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="jumbotron form-worktime introjs-relativePosition" id="result" data-step="6"
+                data-intro="Ergebnisse der Berechnung." data-tooltipclass="forLastStep">
+                <div class="text-center">
+                    <div class="row container row-adaption">
+                        <div class="col text-center">
+                            <label for="countedworktime">Gewertete Arbeitszeit</label>
+                            <p class="display-5" id="countedworktime">0.00</p>
+                        </div>
+
+                        <div class="col text-center">
+                            <label for="trueworktime">Tatsächliche Arbeitszeit</label>
+                            <p class="display-5" id="trueworktime">0.00</p>
+                        </div>
+
+                        <div class="col text-center">
+                            <label for="gleitzeit">Gleitzeit</label>
+                            <p class="display-5" id="gleitzeit">0.00</p>
+                        </div>
+                    </div>
+
+                    <div id="cc-box" class="row container row-adaption" style="margin-top:0;">
+                        <div id="countdown15" class="ClassyCountdownDemo container"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- JavaScript-->
+    <!--================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+
+    <!-- Imports -->
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+        integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Original -->
+    <script src="js/original/countdown.js" defer></script>
+    <script src="js/original/bootstrap.js" defer></script>
+    <script src="js/original/intro.js" defer></script>
+    <script src="js/original/jquery.knob.js" defer></script>
+    <script src="js/original/jquery.throttle.js" defer></script>
+    <script src="js/original/jquery.classycountdown.js" defer></script>
+
+    <!-- Framework -->
+    <script src="js/custom/constants.js" defer></script>
+    <script src="js/custom/storageUtils.js" defer></script>
+    <script src="js/custom/utility.js" defer></script>
+    <script src="js/custom/dateUtils.js" defer></script>
+    <script src="js/custom/uiUtility.js" defer></script>
+
+    <!-- Main Page -->
+    <script src="js/custom/dzrUtils.js" defer></script>
+    <script src="js/custom/dzr.js" type="text/javascript" defer></script>
+    <script src="js/custom/devOptions.js" defer></script>
+
+    <!-- Addons and Modals -->
+    <script src="js/custom/customDevOptions.js" defer></script>
+    <script src="js/custom/currentStatsMessage.js" defer></script>
+    <script src="js/custom/shortcutInformation.js" defer></script>
+    <script src="js/custom/notifications.js" defer></script>
+    <script src="js/custom/management.js" defer></script>
+
+    <script src="js/custom/flexOfficeUtils.js" defer></script>
+    <script src="js/custom/flexOffice.js" defer></script>
+
+    <script src="js/custom/weekTimeUtils.js" defer></script>
+    <script src="js/custom/weekTime.js" defer></script>
+
+    <script defer>
+        document.addEventListener('DOMContentLoaded', () => {
+            setUpWeekTime();
+            setUpFlexOffice();
+            setUpDevOptions();
+            setUpCurrentStatsMessage();
+            setUpShortcutInformation();
+
+            refreshDevOptionCookies();
+            disableHTMLElements();
+
+            checkForDevOptions();
+            activateDevOptionsFromURL();
+            updateForeverCookies();
+            removeCustomButtonParameters();
+            consoleIntro();
+        });
+    </script>
+
+
+</body>
+
+</html>
