@@ -243,7 +243,7 @@ function getYearForMonthWithSixMonthRange(month) {
     for (let i = 0; i <= 5; i++) {
 
         if (currentMonth + i > 11) {
-            nextSixMonths.push((currentMonth + i) - 1);
+            nextSixMonths.push((currentMonth + i) - 12);
         }
 
         nextSixMonths.push(currentMonth + i);
