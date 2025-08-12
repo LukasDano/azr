@@ -312,6 +312,7 @@ function populateDropdown(dropDownId, optionsList) {
                 dropdown.appendChild(opt);
             }
         });
+    }
 }
 
 /**
