@@ -14,6 +14,10 @@ Jetzt wird das Tool über Github-Pages gehostet (einfach die Links unten nutzen)
 - ✅ [Aktuelle Version](https://lukasdano.github.io/azr/main/)
 - ⚙️ [Testversion](https://lukasdano.github.io/azr/bugfix/)
 
+## Status
+[![Deploy](https://github.com/LukasDano/arbeitszeitrechner/actions/workflows/deploy.yml/badge.svg)](https://github.com/LukasDano/arbeitszeitrechner/actions/workflows/deploy.yml)
+[![Tests](https://github.com/LukasDano/arbeitszeitrechner/actions/workflows/tests.yml/badge.svg)](https://github.com/LukasDano/arbeitszeitrechner/actions/workflows/tests.yml)
+[![Update Database](https://github.com/LukasDano/arbeitszeitrechner/actions/workflows/updateDB.yml/badge.svg)](https://github.com/LukasDano/arbeitszeitrechner/actions/workflows/updateDB.yml)
 
 ## Anmerkung
 

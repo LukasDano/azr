@@ -55,7 +55,7 @@ function getYearForNextTimeMonth(month) {
     const currentYear = new Date().getFullYear();
     const currentMonth = getCurrentMonth();
 
-    if (currentMonth > month) return currentYear - 1;
+    if (currentMonth > month) return currentYear + 1;
     return currentYear;
 }
 

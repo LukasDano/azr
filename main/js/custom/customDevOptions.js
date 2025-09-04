@@ -291,23 +291,24 @@ function deleteCustomButton() {
  */
 function populateDropdown(dropDownId, optionsList) {
     const dropdown = document.getElementById(dropDownId);
-
+    
     dropdown.innerHTML = '';
-
+    
     if (Array.isArray(optionsList)) {
         optionsList.forEach(option => {
             const opt = document.createElement('option');
             opt.value = option;
             opt.textContent = option;
-
+    
             dropdown.appendChild(opt);
         });
     } else if (typeof optionsList === "object") {
-        optionsList.forEach(option => {
-            if (optionsList.hasOwnProperty(option)) {
+        Object.entries(optionsList).forEach(option => {
+            if (optionsList.hasOwnProperty(option[0])) {
+                const optionName = option[0];
                 const opt = document.createElement('option');
-                opt.value = option;
-                opt.textContent = option;
+                opt.value = optionName;
+                opt.textContent = optionName;
                 dropdown.appendChild(opt);
             }
         });
